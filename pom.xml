@@ -37,6 +37,6 @@
   </dependencies>
   <packaging>pom</packaging>
   <modules>
-  	<module>service-eureka</module>
+  	<module>server-eureka</module>
   </modules>
 </project>
