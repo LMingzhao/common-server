@@ -1,0 +1,39 @@
+debug: true
+spring:
+  application:
+    name: service-eureka
+server:
+  port: 9901
+#security:
+#  user:
+#    name: admin
+#    password: admin
+eureka:
+  instance:
+    hostname: localhost
+    #prefer-ip-address: true
+    #instanceId: ${spring.application.name}:${server.port}
+  client:
+    #表示是否将自己注册到Eureka Server，默认为true。由于当前这个应用就是Eureka Server，故而设为false
+    register-with-eureka: false
+    #表示是否从Eureka Server获取注册信息，默认为true。因为这是一个单点的Eureka Server，不需要同步其他的Eureka Server节点的数据，故而设为false。
+    fetch-registry: false
+    serviceUrl:
+#      defaultZone: http://${security.user.name}:${security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  #如果您在云环境中运行，您将需要传入java commandline属性-Deureka.datacenter=cloud，因此，Client/Server知道如何初始化特定于AWS云的信息。
+  #此处设置会改变eureka控制台的显示
+  #datacenter: micro-cloud
+  #此处设置会改变eureka控制台的显示
+  environment: dev
+  server:
+    #关闭eureka服务的自我保护模式,当客户端的健康检查失败的时候,eureka认为可能是自身的问题,所以进入保护状态,不会将客户端从注册表中删除
+    #如果关闭了自我保护模式，一旦与客户端之间的健康检查失败,则将客户端从注册表中删除
+    #生产环境参不建议修改,会破坏eureka自身特性,只用于测试
+    enable-self-preservation: false
+    #每隔多少毫秒清理一次注册表,单位为毫秒,默认为60 * 1000
+    #生产环境参不建议修改,会破坏eureka自身特性
+    eviction-interval-timer-in-ms: 60000
+    
+    
+    
